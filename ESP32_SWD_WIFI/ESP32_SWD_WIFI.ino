@@ -2,43 +2,39 @@
    Copyright (c) 2021 Aaron Christophel ATCnetz.de
    SPDX-License-Identifier: GPL-3.0-or-later
 */
-
-#ifdef ENABLE_OTA
-#include <ArduinoOTA.h>
-#endif
-
-#include "wifimanager.h"
+#include <WiFi.h>
+#include <WebServer.h>
 #include "web.h"
 #include "glitcher.h"
 #include "nrf_swd.h"
 #include "swd.h"
+#include "secrets.h"
 
 void setup()
 {
+  // Serial init
   Serial.begin(115200);
   delay(2000);
+
+  // WiFi init
+  WiFi.mode(WIFI_AP);
+  WiFi.softAP(AP_NAME, AP_PASSWD);
+  Serial.printf("Initializing the WiFi AP: ");
+  Serial.println(AP_NAME);
+  init_web();
+
+  // SWD init
   swd_begin();
   glitcher_begin();
-  init_wifimanager();
-  init_web();
   Serial.printf("SWD Id: 0x%08x\r\n", nrf_begin());
-
-#ifdef ENABLE_OTA
-  ArduinoOTA.begin();
-#endif
 }
 
 void loop()
 {
-#ifdef ENABLE_OTA
-  ArduinoOTA.handle();
-#endif
-  if (get_glitcher())
-  {
+  if (get_glitcher()) {
     do_glitcher();
   }
-  else
-  {
+  else {
     do_nrf_swd();
   }
 }

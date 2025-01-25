@@ -1,16 +1,15 @@
+const char indexpage[] PROGMEM = R"=====(
 <!DOCTYPE html>
-
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
-        rel="stylesheet">
     <title>SWD Flasher</title>
     <style type="text/css">
         * {
-            font-family: 'Roboto', sans-serif;
+            font-family: sans-serif;
+            color: white !important;
             font-weight: 300;
+            background-color: black;
         }
 
         h2,
@@ -35,12 +34,12 @@
 
         section {
             margin: 1.5em;
-            border: 1px solid black;
+            border: 1px solid white;
             padding: 1em;
         }
 
         section>h2 {
-            background-color: white;
+            background-color: #339844;
             margin-top: -1.5em;
             width: max-content;
             padding: 0 0.5em;
@@ -55,7 +54,7 @@
         <h1>ESP32 SWD Flasher</h1>
         <p>nRF52 Flasher and Glitcher</p>
     </header>
-    Copyright (c) 2021 Aaron Christophel ATCnetz.de
+    <p>Copyright (c) 2021 Aaron Christophel ATCnetz.de</p>
     <section>
         <h2>Glitcher</h2>
         <label for="delay">Delay Input (µs):</label>
@@ -189,8 +188,8 @@
         ESP32.<br>
         <br>
         To flash an nRF52 connect the following:
-		<br>• nRF52 <b>SWDCLK</b> to ESP gpio
-		<br>• nRF52 <b>SWDIO</b> to ESP gpio
+		<br>• nRF52 <b>SWDCLK</b> to ESP GPIO 21
+		<br>• nRF52 <b>SWDIO</b> to ESP GPIO  19
 		<br>• nRF52 <b>GND</b> to ESP <b>GND</b> to N-Channel MOSFET <b>source</b> (Optional: O-scope <b>GND Clips</b>)
 		<br>• Then power the nRF52 as needed.<br>
 		<br>
@@ -332,5 +331,5 @@
         updateStatus();
     </script>
 </body>
-
 </html>
+)=====";
